@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="app">
+        
+        
+        <!-- App Header -->
+        <div class="app-header">
+          <h1>Task Manager</h1>
+          <button id="themeBtn">Dark Mode</button>
+          <p>Create, edit, complete and manage your daily tasks</p>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="dashboard-card">
+            <h3>Total Tasks</h3>
+            <p id="totalCount">0</p>
+        </div>
+
+         <div class="dashboard-card">
+            <h3>Pending</h3>
+            <p id="pendingCount">0</p>
+        </div>
+
+         <div class="dashboard-card">
+            <h3>Completed</h3>
+            <p id="completedCount">0</p>
+        </div>
+      </div>
+
+      <!-- Task Form -->
+      <form>
+        <input type="text" placeholder="Task Title" />
+        <select>
+          <option value="">Select Category</option>
+          <option value="study">Study</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="health">Health</option>
+          <option value="shopping">Shopping</option>
+        </select>
+        <button type="submit">Add Task</button>
+      </form>
+
+
+      <!-- Task Container -->
+      <div class="task-container">
+        
+      
+      </div>
+    </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
