@@ -5,6 +5,7 @@ const totalCount = document.querySelector("#totalCount");
 const pendingCount = document.querySelector("#pendingCount");
 const completedCount = document.querySelector("#completedCount");
 const themeBtn = document.querySelector("#themeBtn");
+const deleteAllBtn = document.querySelector("#deleteAllBtn");
 
 let allTasks = [];
 
@@ -24,6 +25,12 @@ const updateDashboard = () => {
 
 const showTasks = () => {
   taskContainer.innerHTML = "";
+
+  if (allTasks.length >= 2) {
+    deleteAllBtn.style.display = "block";
+  } else {
+    deleteAllBtn.style.display = "none";
+  }
 
   if (allTasks.length === 0) {
     taskContainer.innerHTML = `
@@ -46,37 +53,76 @@ const showTasks = () => {
         ${newTask.category}
     </span>
 </div>
-            <div class="task-buttons">
+    <div class="task-buttons">
 
-  ${newTask.completed ? "" : `<button id="complete" onclick="completeTask(${index})">Complete</button>`}
+  ${
+    newTask.completed
+      ? ""
+      : `<button id="complete" onclick="completeTask(${index})">Complete</button>`
+  }
 
-  <button id="edit" onclick="editTask(${index})">Edit</button>
+  ${
+    newTask.completed
+      ? ""
+      : `<button id="edit" onclick="editTask(${index})">Edit</button>`
+  }
 
   <button id="delete" onclick="deleteTask(${index})">Delete</button>
 
 </div>
-
-          
             
         </div>`;
   });
   updateDashboard();
 };
 
+
 const deleteTask = (index) => {
-  let confirmDelete = confirm("Are you sure you want to delete this task");
-  if (confirmDelete === false) {
+  let confirmDelete = confirm("Are you sure you want to delete this task?");
+
+  if (!confirmDelete) {
     return;
   }
+
   allTasks.splice(index, 1);
+
+  updateIndex = null;
+  form.reset();
+  submitBtn.textContent = "Add Task";
+
   saveTask();
   showTasks();
 };
 
+const deleteAllTasks = () => {
+  let confirmDelete = confirm("Are you sure you want to delete all tasks?");
+
+  if (!confirmDelete) {
+    return;
+  }
+
+  allTasks = [];
+
+  updateIndex = null;
+  form.reset();
+  submitBtn.textContent = "Add Task";
+
+  saveTask();
+  showTasks();
+};
+
+deleteAllBtn.addEventListener("click", () => {
+  deleteAllTasks();
+});
+
 const completeTask = (index) => {
   allTasks[index].completed = true;
-  saveTask();
 
+  updateIndex = null;
+  form.reset();
+  submitBtn.textContent = "Add Task";
+
+  saveTask();
   showTasks();
 };
 
